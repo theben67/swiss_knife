@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Angularjs binding</title>
+  </head>
+  <body ng-controller="appController">
+
+    <h1 align="center">Simple todo list</h1>
+    
+    <div align="center">
+      <input type="text" placeholder="My todo" ng-model="currentTodo">
+      <button ng-click="addTodo()">Add</button>
+    </div>
+
+    <div style="margin-left:10%">
+      <ul>
+        <li ng-repeat="todo in todoList track by $index">{{todo}} <button ng-click="deleteTodo($index)">Delete</button></li>
+      </ul>
+    </div>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="./appController.js"></script>
+    <script src="./app.js"></script>
+
+  </body>
+</html>
