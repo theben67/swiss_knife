@@ -17,24 +17,25 @@
   var parseDate = d3.time.format("%m/%d/%Y").parse;
   data.forEach(function(d) {
 	   d.date = parseDate(d.date);
-	   d.total= d.http_404+d.http_200+d.http_302;
-     d.Year=d.date.getFullYear();
+	   d.total = d.http_404+d.http_200+d.http_302;
+     d.Year = d.date.getFullYear();
   });
 
 
   var dateDim = ndx.dimension(function(d) {return d.date;});
   var hits = dateDim.group().reduceSum(dc.pluck('total'));
-  var status_200=dateDim.group().reduceSum(function(d) {return d.http_200;});
-  var status_302=dateDim.group().reduceSum(function(d) {return d.http_302;});
-  var status_404=dateDim.group().reduceSum(function(d) {return d.http_404;});
-  var datatable   = dc.dataTable("#dc-data-table");
-  var yearDim  = ndx.dimension(function(d) {return d.Year;});
+  var status_200 = dateDim.group().reduceSum(function(d) {return d.http_200;});
+  var status_302 = dateDim.group().reduceSum(function(d) {return d.http_302;});
+  var status_404 = dateDim.group().reduceSum(function(d) {return d.http_404;});
+  var datatable = dc.dataTable("#dc-data-table");
+  var yearDim = ndx.dimension(function(d) {return d.Year;});
   var year_total = yearDim.group().reduceSum(function(d) {return d.total;});
 
   var minDate = dateDim.bottom(1)[0].date;
   var maxDate = dateDim.top(1)[0].date;
-  var hitslineChart  = dc.lineChart("#chart-line-hitsperday");
-  var yearRingChart   = dc.pieChart("#chart-ring-year");
+  var hitslineChart = dc.lineChart("#chart-line-hitsperday");
+  var yearRingChart = dc.pieChart("#chart-ring-year");
+
   datatable
       .dimension(dateDim)
       .group(function(d) {return d.Year;})
@@ -46,6 +47,7 @@
           function(d) {return d.http_404;},
           function(d) {return d.total;}
       ]);
+
   hitslineChart
      .width(500).height(200)
      .dimension(dateDim)
@@ -62,4 +64,5 @@
       .dimension(yearDim)
       .group(year_total)
       .innerRadius(30);
-      dc.renderAll();
+
+  dc.renderAll();
