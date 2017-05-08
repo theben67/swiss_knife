@@ -1,0 +1,10 @@
+<h1 align="center">Simple todo app</h1>
+
+<div align="center">
+  <input type="text" [(ngModel)]="todo">
+  <button (click)="addTodo()">Add</button>
+</div>
+
+<ul style="margin-left:10%">
+  <li *ngFor='let todo of todos; let i = index'>{{todo}} <button (click)="deleteTodo(i)">Delete</button></li>
+</ul>
