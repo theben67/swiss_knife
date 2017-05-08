@@ -1,3 +1,3 @@
 # swiss_knife
 
-## This is a library, born in my experience.I hope you will find your dream.
+## The "grand bazaar", 100% Javascript.
